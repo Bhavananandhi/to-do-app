@@ -4,15 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List App</title>
+    <!-- Link to your styles.css file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>To-Do List</h1>
-        <input type="text" id="taskInput" placeholder="Enter a task...">
+        
+        <!-- Input field for adding tasks -->
+        <input type="text" id="taskInput" placeholder="Enter a task..." required>
         <button onclick="addTask()">Add Task</button>
-        <ul id="taskList"></ul>
+
+        <!-- Unordered list to display tasks -->
+        <ul id="task-list">
+            <!-- Tasks will be dynamically added here -->
+        </ul>
     </div>
+
+    <!-- Include your JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- Inline JavaScript for rendering tasks -->
+    <script>
+        function renderTask(task) {
+            return `
+                <li id="task-${task.id}">
+                    ${task.content}
+                    <button onclick="deleteTask(${task.id})">Delete</button>
+                    <button onclick="editTask(${task.id})">Edit</button>
+                </li>`;
+        }
+    </script>
 </body>
 </html>
